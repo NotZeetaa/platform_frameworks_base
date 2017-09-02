@@ -1172,6 +1172,12 @@ public final class PowerManagerService extends SystemService
         resolver.registerContentObserver(Settings.Global.getUriFor(
                 Settings.Global.WAKELOCK_BLOCKING_LIST),
                 false, mSettingsObserver, UserHandle.USER_ALL);
+        resolver.registerContentObserver(Settings.Global.getUriFor(
+                Settings.Global.WAKELOCK_BLOCKING_ENABLED),
+                false, mSettingsObserver, UserHandle.USER_ALL);
+        resolver.registerContentObserver(Settings.Global.getUriFor(
+                Settings.Global.WAKELOCK_BLOCKING_LIST),
+                false, mSettingsObserver, UserHandle.USER_ALL);
 
         IVrManager vrManager = IVrManager.Stub.asInterface(getBinderService(Context.VR_SERVICE));
 
@@ -1300,6 +1306,12 @@ public final class PowerManagerService extends SystemService
         // depends on AOD_NOTIFICATION_PULSE_ACTIVATED - so MUST be afterwards
         // no need to call us again
         mAlwaysOnEnabled = mAmbientDisplayConfiguration.alwaysOnEnabled(UserHandle.USER_CURRENT);
+
+        mWakeLockBlockingEnabled = Settings.Global.getInt(resolver,
+                Settings.Global.WAKELOCK_BLOCKING_ENABLED, 0);
+        String blockedWakelockList = Settings.Global.getString(resolver,
+                Settings.Global.WAKELOCK_BLOCKING_LIST);
+        setBlockedWakeLocks(blockedWakelockList);
 
         mWakeLockBlockingEnabled = Settings.Global.getInt(resolver,
                 Settings.Global.WAKELOCK_BLOCKING_ENABLED, 0);
