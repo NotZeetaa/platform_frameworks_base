@@ -670,6 +670,11 @@
     <!-- For tether entitlement recheck-->
     <protected-broadcast
         android:name="com.android.server.connectivity.tethering.PROVISIONING_RECHECK_ALARM" />
+
+    <!-- Gaming Mode -->
+    <protected-broadcast android:name="android.intent.action.GAMING_MODE_ON" />
+    <protected-broadcast android:name="android.intent.action.GAMING_MODE_OFF" />
+
     <!-- ====================================================================== -->
     <!--                          RUNTIME PERMISSIONS                           -->
     <!-- ====================================================================== -->
