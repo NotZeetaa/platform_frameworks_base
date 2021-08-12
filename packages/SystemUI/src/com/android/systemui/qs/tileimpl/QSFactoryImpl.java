@@ -40,7 +40,6 @@ import com.android.systemui.qs.tiles.FlashlightTile;
 import com.android.systemui.qs.tiles.GamingModeTile;
 import com.android.systemui.qs.tiles.HeadsUpTile;
 import com.android.systemui.qs.tiles.HotspotTile;
-import com.android.systemui.qs.tiles.ImmersiveTile;
 import com.android.systemui.qs.tiles.LocationTile;
 import com.android.systemui.qs.tiles.NfcTile;
 import com.android.systemui.qs.tiles.NightDisplayTile;
@@ -215,8 +214,6 @@ public class QSFactoryImpl implements QSFactory {
                 return mHeadsUpTileProvider.get();
             case "gaming":
                 return mGamingModeTileProvider.get();
-            case "immersive":
-                return new ImmersiveTile(mHost);
         }
 
         // Custom tiles
