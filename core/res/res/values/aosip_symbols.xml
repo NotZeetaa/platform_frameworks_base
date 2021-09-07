@@ -82,5 +82,8 @@
 
   <!-- Ambient notification light color -->
   <java-symbol type="integer" name="config_ambientNotificationDefaultColor" />
+  
+  <!-- Wheter device supports an gaming mode profiles -->
+  <java-symbol type="bool" name="config_gamingmode_performance" />
 
 </resources>

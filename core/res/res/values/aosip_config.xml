@@ -117,5 +117,8 @@
 
     <!-- Default value for Ambiant Pulse light color -->
     <integer name="config_ambientNotificationDefaultColor">0xFF3980FF</integer>
+    
+    <!-- Wheter device supports an gaming mode profiles -->
+    <bool name="config_gamingmode_performance">false</bool>
 
 </resources>
