@@ -476,7 +476,6 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     private boolean mAppFullscreen;
     private boolean mAppImmersive;
-    private boolean mHeadsUpDisabled, mGamingModeActivated;
 
     private final DisplayMetrics mDisplayMetrics;
 
@@ -2170,12 +2169,6 @@ public class StatusBar extends SystemUI implements DemoMode,
                     Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.GAMING_MODE_ACTIVE),
-                    false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.GAMING_MODE_HEADSUP_TOGGLE),
-                    false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.HEADS_UP_STOPLIST_VALUES),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
@@ -2211,9 +2204,6 @@ public class StatusBar extends SystemUI implements DemoMode,
             } else if (uri.equals(Settings.System.getUriFor(Settings.System.SCREEN_BRIGHTNESS_MODE)) ||
                     uri.equals(Settings.System.getUriFor(Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL))) {
                 setScreenBrightnessMode();
-            } else if (uri.equals(Settings.System.getUriFor(Settings.System.GAMING_MODE_ACTIVE)) ||
-                    uri.equals(Settings.System.getUriFor(Settings.System.GAMING_MODE_HEADSUP_TOGGLE))) {
-                setGamingMode();
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.HEADS_UP_STOPLIST_VALUES))) {
                 setHeadsUpStoplist();
@@ -2234,7 +2224,6 @@ public class StatusBar extends SystemUI implements DemoMode,
             updateNavigationBar(false);
             setQsBatteryPercentMode();
             setScreenBrightnessMode();
-            setGamingMode();
             setHeadsUpStoplist();
             setHeadsUpBlacklist();
         }
@@ -2307,17 +2296,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         mBrightnessControl = Settings.System.getIntForUser(
             mContext.getContentResolver(), Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL, 0,
             UserHandle.USER_CURRENT) == 1;
-    }
-
-    private void setGamingMode() {
-        mGamingModeActivated = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.GAMING_MODE_ACTIVE, 0,
-                UserHandle.USER_CURRENT) == 1;
-        mHeadsUpDisabled = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.GAMING_MODE_HEADSUP_TOGGLE, 1,
-                UserHandle.USER_CURRENT) == 1;
-        if (mNotificationInterruptStateProvider != null)
-            mNotificationInterruptStateProvider.setGamingPeekMode(mGamingModeActivated && mHeadsUpDisabled);
     }
 
     /**
